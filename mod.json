@@ -12,5 +12,10 @@
 	"developer": "Cvolton",
 	"description": "Assigns Level IDs to Editor levels that other mods can use to refer to them",
 	"early-load": true,
-    "repository": "https://github.com/Cvolton/levelid-api-geode"
+    "repository": "https://github.com/Cvolton/levelid-api-geode",
+	"api": {
+		"include": [
+			"include/*.hpp"
+		]
+	}
 }
