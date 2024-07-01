@@ -12,6 +12,10 @@ add_library(${PROJECT_NAME} SHARED
     src/EditorListIDs.cpp
 )
 
+if (PROJECT_IS_TOP_LEVEL)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE CVOLTON_EDITORIDS_EXPORTING)
+endif()
+
 if (NOT DEFINED ENV{GEODE_SDK})
     message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
 else()
