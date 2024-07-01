@@ -13,5 +13,7 @@ namespace EditorIDs {
         void tryTransferID(GJGameLevel* source, GJGameLevel* dest);
 
         void handleLevelDupes(cocos2d::CCArray* array);
+
+        void reset();
     }
 }

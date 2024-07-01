@@ -1,3 +1,3 @@
-# Template Mod
+# Editor Level ID API
 
-Edit about.md to change this
+Assigns Level IDs to Editor levels that other mods can use to refer to them.

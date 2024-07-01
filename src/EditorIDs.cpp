@@ -10,6 +10,14 @@ static int s_maxID = 0;
 static std::atomic_bool s_checkQueued = false;
 static std::unordered_map<int, Ref<GJGameLevel>> s_idMap;
 
+$on_mod(DataLoaded) {
+    s_maxID = std::max(Mod::get()->getSavedValue("editor_id_max", 0), s_maxID);
+}
+
+$on_mod(DataSaved) {
+    Mod::get()->setSavedValue("editor_id_max", s_maxID);
+}
+
 int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {
     if(level->m_levelType != GJLevelType::Editor) return level->m_levelID;
 
@@ -97,4 +105,11 @@ void EditorIDs::Management::handleLevelDupes(cocos2d::CCArray* array) {
     }
 
     log::info("Handled level dupes in local levels");
+}
+
+void EditorIDs::Management::reset() {
+    s_needsAssignment = {};
+    s_maxID = 0;
+    s_checkQueued = false;
+    s_idMap.clear();
 }

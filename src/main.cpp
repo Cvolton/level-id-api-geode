@@ -30,6 +30,12 @@ class $modify(LocalLevelManager) {
 			EditorIDs::Management::handleLevelDupes(m_localLevels);
 		});
 	}
+
+	void firstLoad() {
+		LocalLevelManager::firstLoad();
+
+		EditorIDs::Management::reset();
+	}
 };
 
 #include <Geode/modify/LevelCell.hpp>
