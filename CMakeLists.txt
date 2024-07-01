@@ -12,6 +12,8 @@ add_library(${PROJECT_NAME} SHARED
     src/EditorListIDs.cpp
 )
 
+target_include_directories(${PROJECT_NAME} PUBLIC include)
+
 if (PROJECT_IS_TOP_LEVEL)
     target_compile_definitions(${PROJECT_NAME} PRIVATE CVOLTON_EDITORIDS_EXPORTING)
 endif()

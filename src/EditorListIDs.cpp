@@ -1,4 +1,4 @@
-#include "include/EditorIDsManagement.hpp"
+#include <EditorIDsManagement.hpp>
 
 #include <Geode/Geode.hpp>
 #include <queue>
