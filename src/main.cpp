@@ -30,13 +30,15 @@ class $modify(GJLevelList) {
 		EditorIDs::ListManagement::verifyIDAssignmentDelayed(this);
 	}
 
-	/*void handleStatsConflict(GJGameLevel* source) {
-		GJLevelList::handleStatsConflict(source);
+	bool hasMatchingLevels(GJLevelList* source) {
+		if(!GJLevelList::hasMatchingLevels(source)) return false;
 
-		if(m_listType != GJLevelType::Editor) return;
+        log::info("Matched list {} with list {}", source->m_listName, m_listName);
 
-		EditorIDs::ListManagement::tryTransferID(source, this);
-	}*/
+		if(m_listType == GJLevelType::Editor) EditorIDs::ListManagement::tryTransferID(source, this);
+
+        return true;
+	}
 };
 
 #include <Geode/modify/LocalLevelManager.hpp>
