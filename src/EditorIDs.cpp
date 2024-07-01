@@ -1,4 +1,4 @@
-#include "include/EditorIDs.hpp"
+#include "include/EditorIDsManagement.hpp"
 
 #include <Geode/Geode.hpp>
 #include <queue>
@@ -23,6 +23,10 @@ int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {
 
     if(autoAssign) Management::verifyIDAssignment(level);
     return level->m_downloads == level->m_featured ? level->m_downloads : 0;
+}
+
+GJGameLevel* EditorIDs::getLevelByID(int id) {
+    return s_idMap.contains(id) ? s_idMap[id] : nullptr;
 }
 
 void EditorIDs::Management::assignNewID(GJGameLevel *level) {

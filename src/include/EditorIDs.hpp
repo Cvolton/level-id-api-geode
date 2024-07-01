@@ -14,30 +14,9 @@
 #endif
 
 namespace EditorIDs {
-    int EDITORIDS_DLL getID(GJGameLevel* level, bool autoAssign = true);
-    int EDITORIDS_DLL getID(GJLevelList* level, bool autoAssign = true);
+    EDITORIDS_DLL int getID(GJGameLevel* level, bool autoAssign = true);
+    EDITORIDS_DLL int getID(GJLevelList* level, bool autoAssign = true);
 
-    namespace Management {
-        void EDITORIDS_DLL assignNewID(GJGameLevel* level);
-        void EDITORIDS_DLL verifyIDAssignment(GJGameLevel* level);
-        void EDITORIDS_DLL verifyIDAssignmentDelayed(GJGameLevel* level);
-        void EDITORIDS_DLL queueCheck();
-        void EDITORIDS_DLL tryTransferID(GJGameLevel* source, GJGameLevel* dest);
-
-        void EDITORIDS_DLL handleLevelDupes(cocos2d::CCArray* array);
-
-        void EDITORIDS_DLL reset();
-    }
-
-    namespace ListManagement {
-        void EDITORIDS_DLL assignNewID(GJLevelList* level);
-        void EDITORIDS_DLL verifyIDAssignment(GJLevelList* level);
-        void EDITORIDS_DLL verifyIDAssignmentDelayed(GJLevelList* level);
-        void EDITORIDS_DLL queueCheck();
-        void EDITORIDS_DLL tryTransferID(GJLevelList* source, GJLevelList* dest);
-
-        void EDITORIDS_DLL handleListDupes(cocos2d::CCArray* array);
-
-        void EDITORIDS_DLL reset();
-    }
+    EDITORIDS_DLL GJGameLevel* getLevelByID(int id);
+    EDITORIDS_DLL GJLevelList* getListByID(int id);
 }

@@ -1,5 +1,5 @@
 #include <Geode/Geode.hpp>
-#include "include/EditorIDs.hpp"
+#include "include/EditorIDsManagement.hpp"
 
 using namespace geode::prelude;
 
