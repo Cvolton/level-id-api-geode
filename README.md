@@ -23,6 +23,10 @@ You can use Editor Level ID API as a dependency by declaring it in your `mod.jso
     ]
 }
 ```
+and using the following header:
+```cpp
+#include <cvolton.editor-ids/include/EditorIDs.hpp>
+```
 
 All editor levels should already have IDs assigned by default on mod load. Getting the ID assigned to the level can be done as follows:
 ```cpp
