@@ -39,6 +39,8 @@ Similarly you can utilize a different overload of the same function to get the I
 int listId = EditorIDs::getID(myGJLevelList);
 ```
 
+You can also use `EditorIDs::getLevelByID` and `EditorIDs::getListByID` to perform the reverse of this operation.
+
 Namespaces `EditorIDs::Management` and `EditorIDs::ListManagement` are also exported, however they should be treated as danger zone and using functions within them should only be considered last resort.
 
 Alternatively it is also possible to fetch and check the fields used to store the IDs directly, however this is heavily discouraged, as the exact fields used are considered an implementation detail and subject to change in the future.
