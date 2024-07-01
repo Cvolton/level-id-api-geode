@@ -21,6 +21,7 @@ class $modify(GJGameLevel) {
 	}
 };
 
+#include <Geode/modify/GJLevelList.hpp>
 class $modify(GJLevelList) {
 
 	void dataLoaded(DS_Dictionary* dict) {
