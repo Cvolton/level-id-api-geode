@@ -9,6 +9,7 @@ namespace EditorIDs {
         EDITORIDS_DLL void verifyIDAssignmentDelayed(GJGameLevel* level);
         EDITORIDS_DLL void queueCheck();
         EDITORIDS_DLL void tryTransferID(GJGameLevel* source, GJGameLevel* dest);
+        EDITORIDS_DLL void levelIsDeleting(GJGameLevel* level);
 
         EDITORIDS_DLL void handleLevelDupes(cocos2d::CCArray* array);
 
@@ -23,6 +24,7 @@ namespace EditorIDs {
         EDITORIDS_DLL void verifyIDAssignmentDelayed(GJLevelList* level);
         EDITORIDS_DLL void queueCheck();
         EDITORIDS_DLL void tryTransferID(GJLevelList* source, GJLevelList* dest);
+        EDITORIDS_DLL void listIsDeleting(GJLevelList* level);
 
         EDITORIDS_DLL void handleListDupes(cocos2d::CCArray* array);
 

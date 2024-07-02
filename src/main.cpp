@@ -77,6 +77,21 @@ class $modify(GameManager) {
     }
 };
 
+#include <Geode/modify/GameLevelManager.hpp>
+class $modify(GameLevelManager) {
+    void deleteLevel(GJGameLevel* level) {
+        EditorIDs::Management::levelIsDeleting(level);
+
+        GameLevelManager::deleteLevel(level);
+    }
+
+    void deleteLevelList(GJLevelList* list) {
+        EditorIDs::ListManagement::listIsDeleting(list);
+
+        GameLevelManager::deleteLevelList(list);
+    }
+};
+
 #include <Geode/modify/LevelCell.hpp>
 class $modify(LevelCell) {
     void loadLocalLevelCell() {

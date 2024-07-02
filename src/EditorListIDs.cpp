@@ -102,6 +102,18 @@ void EditorIDs::ListManagement::tryTransferID(GJLevelList *source, GJLevelList *
     }
 }
 
+void EditorIDs::ListManagement::listIsDeleting(GJLevelList *list) {
+    if(list->m_listType != GJLevelType::Editor) return;
+
+    auto id = EditorIDs::getID(list);
+
+    if(s_idMap.contains(id) && s_idMap[id] == list) {
+        s_idMap.erase(list->m_downloads);
+
+        if(s_debugPrint) log::info("Removed custom ID {} from editor list {}", list->m_downloads, list->m_listName);
+    }
+}
+
 void EditorIDs::ListManagement::handleListDupes(cocos2d::CCArray* array) {
     if(!array) return;
 

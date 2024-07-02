@@ -103,6 +103,18 @@ void EditorIDs::Management::tryTransferID(GJGameLevel *source, GJGameLevel *dest
     }
 }
 
+void EditorIDs::Management::levelIsDeleting(GJGameLevel *level) {
+    if(level->m_levelType != GJLevelType::Editor) return;
+
+    auto id = EditorIDs::getID(level);
+
+    if(s_idMap.contains(id) && s_idMap[id] == level) {
+        s_idMap.erase(level->m_downloads);
+
+        if(s_debugPrint) log::info("Removed custom ID {} from editor level {}", level->m_downloads, level->m_levelName);
+    }
+}
+
 void EditorIDs::Management::handleLevelDupes(cocos2d::CCArray* array) {
     if(!array) return;
 
