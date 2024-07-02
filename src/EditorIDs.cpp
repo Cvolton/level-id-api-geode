@@ -27,10 +27,10 @@ $on_mod(DataSaved) {
     Mod::get()->setSavedValue("editor_id_max", s_maxID);
 }
 
-int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {
+int EditorIDs::getID(GJGameLevel* level) {
     if(level->m_levelType != GJLevelType::Editor) return level->m_levelID;
 
-    if(autoAssign) Management::verifyIDAssignment(level);
+    Management::verifyIDAssignment(level);
     return level->m_downloads == level->m_featured ? level->m_downloads : 0;
 
 }

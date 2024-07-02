@@ -32,7 +32,7 @@ All editor levels should already have IDs assigned by default on mod load. Getti
 ```cpp
 int levelId = EditorIDs::getID(level);
 ```
-This also assigns a new ID to the level if it does not have one already. If you do not wish to modify the level object to assign an ID, you can pass a false argument `EditorIDs::getID(level, false);` to skip the auto-assign behavior. This might be desirable while accessing editor IDs during something like `LocalLevelManager::dataLoaded` as a lot of the de-duplication checks are delayed by 1 frame. (This probably does not matter to you if you are not accessing the IDs during a specific frame while loading the game though).
+This also assigns a new ID to the level if it does not have one already.
 
 Similarly you can utilize a different overload of the same function to get the ID of a GJLevelList.
 ```cpp
