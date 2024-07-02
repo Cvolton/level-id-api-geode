@@ -35,7 +35,7 @@ class $modify(GJLevelList) {
 
         log::info("Matched list {} with list {}", source->m_listName, m_listName);
 
-		if(m_listType == GJLevelType::Editor) EditorIDs::ListManagement::tryTransferID(source, this);
+		if(m_listType == GJLevelType::Editor) EditorIDs::ListManagement::tryTransferID(this, source);
 
         return true;
 	}
