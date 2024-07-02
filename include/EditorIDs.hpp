@@ -17,6 +17,9 @@ namespace EditorIDs {
     EDITORIDS_DLL int getID(GJGameLevel* level);
     EDITORIDS_DLL int getID(GJLevelList* level);
 
+    EDITORIDS_DLL int getID(GJGameLevel* level, bool autoAssign);
+    EDITORIDS_DLL int getID(GJLevelList* level, bool autoAssign);
+
     EDITORIDS_DLL GJGameLevel* getLevelByID(int id);
     EDITORIDS_DLL GJLevelList* getListByID(int id);
 }

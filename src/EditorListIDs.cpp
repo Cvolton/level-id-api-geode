@@ -27,10 +27,14 @@ $on_mod(DataSaved) {
     Mod::get()->setSavedValue("editor_list_id_max", s_maxListID);
 }
 
-int EditorIDs::getID(GJLevelList* list) {
+int EditorIDs::getID(GJGameLevel* level) {
+    getID(level, true);
+}
+
+int EditorIDs::getID(GJLevelList* list, bool autoAssign) {
     if(list->m_listType != GJLevelType::Editor) return list->m_listID;
 
-    ListManagement::verifyIDAssignment(list);
+    if(autoAssign) ListManagement::verifyIDAssignment(list);
     return list->m_downloads == list->m_levelsToClaim ? list->m_downloads : 0;
 }
 

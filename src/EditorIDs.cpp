@@ -28,9 +28,13 @@ $on_mod(DataSaved) {
 }
 
 int EditorIDs::getID(GJGameLevel* level) {
+    getID(level, true);
+}
+
+int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {
     if(level->m_levelType != GJLevelType::Editor) return level->m_levelID;
 
-    Management::verifyIDAssignment(level);
+    if(autoAssign) Management::verifyIDAssignment(level);
     return level->m_downloads == level->m_featured ? level->m_downloads : 0;
 
 }
