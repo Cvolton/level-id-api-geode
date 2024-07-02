@@ -1,17 +1,26 @@
 #include <EditorIDsManagement.hpp>
 
 #include <Geode/Geode.hpp>
+#include <Geode/loader/SettingEvent.hpp>
 #include <queue>
 
 using namespace geode::prelude;
 
 static std::queue<Ref<GJGameLevel>> s_needsAssignment;
 static int s_maxID = 0;
+static bool s_debugPrint = false;
 static std::atomic_bool s_checkQueued = false;
 static std::unordered_map<int, Ref<GJGameLevel>> s_idMap;
 
+$on_mod(Loaded) {
+    listenForSettingChanges("debug-print", +[](bool value) {
+        s_debugPrint = value;
+    });
+}
+
 $on_mod(DataLoaded) {
     s_maxID = std::max(Mod::get()->getSavedValue("editor_id_max", 0), s_maxID);
+    s_debugPrint = Mod::get()->getSetting("debug-print");
 }
 
 $on_mod(DataSaved) {
@@ -23,6 +32,7 @@ int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {
 
     if(autoAssign) Management::verifyIDAssignment(level);
     return level->m_downloads == level->m_featured ? level->m_downloads : 0;
+
 }
 
 GJGameLevel* EditorIDs::getLevelByID(int id) {
@@ -35,7 +45,7 @@ void EditorIDs::Management::assignNewID(GJGameLevel *level) {
     level->m_downloads = ++s_maxID;
     level->m_featured = level->m_downloads;
 
-    log::info("Assigned custom ID {} to editor level {}", level->m_downloads, level->m_levelName);
+    if(s_debugPrint) log::info("Assigned custom ID {} to editor level {}", level->m_downloads, level->m_levelName);
 }
 
 void EditorIDs::Management::verifyIDAssignment(GJGameLevel *level) {
@@ -46,7 +56,7 @@ void EditorIDs::Management::verifyIDAssignment(GJGameLevel *level) {
     } else {
         s_maxID = std::max(s_maxID, level->m_downloads);
 
-        log::info("Verified custom ID {} for editor level {}", level->m_downloads, level->m_levelName);
+        if(s_debugPrint) log::info("Verified custom ID {} for editor level {}", level->m_downloads, level->m_levelName);
     }
 
     s_idMap[level->m_downloads] = level;
@@ -77,11 +87,11 @@ void EditorIDs::Management::queueCheck() {
 }
 
 void EditorIDs::Management::tryTransferID(GJGameLevel *source, GJGameLevel *dest) {
-    log::info("Trying to transfer ID from {} to {}", source->m_levelName, dest->m_levelName);
+    if(s_debugPrint) log::info("Trying to transfer ID from {} to {}", source->m_levelName, dest->m_levelName);
 
     if(source->m_levelType != GJLevelType::Editor || dest->m_levelType != GJLevelType::Editor) return;
 
-    log::info("Source: {} ({}), Dest: {} ({})", source->m_downloads, source->m_featured, dest->m_downloads, dest->m_featured);
+    if(s_debugPrint) log::info("Source: {} ({}), Dest: {} ({})", source->m_downloads, source->m_featured, dest->m_downloads, dest->m_featured);
 
     if(dest->m_downloads == 0 || dest->m_featured == 0 || dest->m_downloads != dest->m_featured || (dest->m_downloads == source->m_downloads && dest->m_featured == source->m_featured)) {
         dest->m_downloads = source->m_downloads;
@@ -89,7 +99,7 @@ void EditorIDs::Management::tryTransferID(GJGameLevel *source, GJGameLevel *dest
 
         s_idMap[dest->m_downloads] = dest;
 
-        log::info("Assigned custom ID {} to editor level {} in tryTransferID", dest->m_downloads, dest->m_levelName);
+        if(s_debugPrint) log::info("Assigned custom ID {} to editor level {} in tryTransferID", dest->m_downloads, dest->m_levelName);
     }
 }
 
@@ -101,14 +111,14 @@ void EditorIDs::Management::handleLevelDupes(cocos2d::CCArray* array) {
         auto id = EditorIDs::getID(level);
 
         if(ids.contains(id)) {
-            log::warn("Found duplicate ID {} in local levels, assigning new ID", id);
+            if(s_debugPrint) log::warn("Found duplicate ID {} in local levels, assigning new ID", id);
             assignNewID(level);
         } else {
             ids.insert(id);
         }
     }
 
-    log::info("Handled level dupes in local levels");
+    if(s_debugPrint) log::info("Handled level dupes in local levels");
 }
 
 void EditorIDs::Management::reset() {

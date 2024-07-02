@@ -1,17 +1,26 @@
 #include <EditorIDsManagement.hpp>
 
 #include <Geode/Geode.hpp>
+#include <Geode/loader/SettingEvent.hpp>
 #include <queue>
 
 using namespace geode::prelude;
 
 static std::queue<Ref<GJLevelList>> s_needsAssignment;
 static int s_maxListID = 0;
+static bool s_debugPrint = false;
 static std::atomic_bool s_checkQueued = false;
 static std::unordered_map<int, Ref<GJLevelList>> s_idMap;
 
+$on_mod(Loaded) {
+    listenForSettingChanges("debug-print", +[](bool value) {
+        s_debugPrint = value;
+    });
+}
+
 $on_mod(DataLoaded) {
     s_maxListID = std::max(Mod::get()->getSavedValue("editor_list_id_max", 0), s_maxListID);
+    s_debugPrint = Mod::get()->getSettingValue<bool>("debug-print");
 }
 
 $on_mod(DataSaved) {
@@ -35,7 +44,7 @@ void EditorIDs::ListManagement::assignNewID(GJLevelList *list) {
     list->m_downloads = ++s_maxListID;
     list->m_levelsToClaim = list->m_downloads;
 
-    log::info("Assigned custom ID {} to editor list {}", list->m_downloads, list->m_listName);
+    if(s_debugPrint) log::info("Assigned custom ID {} to editor list {}", list->m_downloads, list->m_listName);
 }
 
 void EditorIDs::ListManagement::verifyIDAssignment(GJLevelList *list) {
@@ -46,7 +55,7 @@ void EditorIDs::ListManagement::verifyIDAssignment(GJLevelList *list) {
     } else {
         s_maxListID = std::max(s_maxListID, list->m_downloads);
 
-        log::info("Verified custom ID {} for editor list {}", list->m_downloads, list->m_listName);
+        if(s_debugPrint) log::info("Verified custom ID {} for editor list {}", list->m_downloads, list->m_listName);
     }
 
     s_idMap[list->m_downloads] = list;
@@ -77,11 +86,11 @@ void EditorIDs::ListManagement::queueCheck() {
 }
 
 void EditorIDs::ListManagement::tryTransferID(GJLevelList *source, GJLevelList *dest) {
-    log::info("Trying to transfer ID from {} to {}", source->m_listName, dest->m_listName);
+    if(s_debugPrint) log::info("Trying to transfer ID from {} to {}", source->m_listName, dest->m_listName);
 
     if(source->m_listType != GJLevelType::Editor || dest->m_listType != GJLevelType::Editor) return;
 
-    log::info("Source: {} ({}), Dest: {} ({})", source->m_downloads, source->m_levelsToClaim, dest->m_downloads, dest->m_levelsToClaim);
+    if(s_debugPrint) log::info("Source: {} ({}), Dest: {} ({})", source->m_downloads, source->m_levelsToClaim, dest->m_downloads, dest->m_levelsToClaim);
 
     if(dest->m_downloads == 0 || dest->m_levelsToClaim == 0 || dest->m_downloads != dest->m_levelsToClaim || (dest->m_downloads == source->m_downloads && dest->m_levelsToClaim == source->m_levelsToClaim)) {
         dest->m_downloads = source->m_downloads;
@@ -89,7 +98,7 @@ void EditorIDs::ListManagement::tryTransferID(GJLevelList *source, GJLevelList *
 
         s_idMap[dest->m_downloads] = dest;
 
-        log::info("Assigned custom ID {} to editor list {} in tryTransferID", dest->m_downloads, dest->m_listName);
+        if(s_debugPrint) log::info("Assigned custom ID {} to editor list {} in tryTransferID", dest->m_downloads, dest->m_listName);
     }
 }
 
@@ -101,14 +110,14 @@ void EditorIDs::ListManagement::handleListDupes(cocos2d::CCArray* array) {
         auto id = EditorIDs::getID(list);
 
         if(ids.contains(id)) {
-            log::warn("Found duplicate ID {} in local lists, assigning new ID", id);
+            if(s_debugPrint) log::warn("Found duplicate ID {} in local lists, assigning new ID", id);
             assignNewID(list);
         } else {
             ids.insert(id);
         }
     }
 
-    log::info("Handled list dupes in local lists");
+    if(s_debugPrint) log::info("Handled list dupes in local lists");
 }
 
 void EditorIDs::ListManagement::reset() {

@@ -17,5 +17,19 @@
 		"include": [
 			"include/*.hpp"
 		]
+	},
+	"settings": {
+        "show-ids": {
+            "name": "Show IDs in search",
+            "description": "Whether the assigned IDs should be shown in the list cells for My Levels and My Lists",
+            "type": "bool",
+            "default": false
+        },
+        "debug-print": {
+            "name": "Print debug messages in Geode Console",
+            "description": "Whether debug messages should be printed in the Geode Console for further debugging assistance",
+            "type": "bool",
+            "default": false
+        }
 	}
 }
