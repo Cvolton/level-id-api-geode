@@ -127,3 +127,15 @@ void EditorIDs::Management::reset() {
     s_checkQueued = false;
     s_idMap.clear();
 }
+
+void EditorIDs::Management::tryRaiseMaxID(int id) {
+    if(id > s_maxID) {
+        s_maxID = id;
+
+        if(s_debugPrint) log::info("Raised max ID to {}", s_maxID);
+    }
+}
+
+int EditorIDs::Management::getMaxID() {
+    return s_maxID;
+}

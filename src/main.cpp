@@ -60,6 +60,23 @@ class $modify(LocalLevelManager) {
 	}
 };
 
+#include <Geode/modify/GameManager.hpp>
+class $modify(GameManager) {
+    void dataLoaded(DS_Dictionary* dict) {
+        GameManager::dataLoaded(dict);
+
+        EditorIDs::Management::tryRaiseMaxID(getIntGameVariable("editor_id_max"_spr));
+        EditorIDs::ListManagement::tryRaiseMaxID(getIntGameVariable("editor_list_id_max"_spr));
+    }
+
+    void encodeDataTo(DS_Dictionary* dict) {
+        setIntGameVariable("editor_id_max"_spr, EditorIDs::Management::getMaxID());
+        setIntGameVariable("editor_list_id_max"_spr, EditorIDs::ListManagement::getMaxID());
+
+        GameManager::encodeDataTo(dict);
+    }
+};
+
 #include <Geode/modify/LevelCell.hpp>
 class $modify(LevelCell) {
     void loadLocalLevelCell() {

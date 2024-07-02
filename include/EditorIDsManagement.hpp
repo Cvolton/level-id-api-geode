@@ -13,6 +13,8 @@ namespace EditorIDs {
         EDITORIDS_DLL void handleLevelDupes(cocos2d::CCArray* array);
 
         EDITORIDS_DLL void reset();
+        EDITORIDS_DLL void tryRaiseMaxID(int id);
+        EDITORIDS_DLL int getMaxID();
     }
 
     namespace ListManagement {
@@ -25,5 +27,7 @@ namespace EditorIDs {
         EDITORIDS_DLL void handleListDupes(cocos2d::CCArray* array);
 
         EDITORIDS_DLL void reset();
+        EDITORIDS_DLL void tryRaiseMaxID(int id);
+        EDITORIDS_DLL int getMaxID();
     }
 }
