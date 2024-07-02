@@ -6,13 +6,13 @@
 		"mac": "2.206",
 		"ios": "2.206"
 	},
-	"id": "cvolton.editor-ids",
+	"id": "cvolton.level-id-api",
 	"name": "Editor Level ID API",
 	"version": "v1.0.0-beta.1",
 	"developer": "Cvolton",
 	"description": "Assigns Level IDs to Editor levels that other mods can use to refer to them",
 	"early-load": true,
-    "repository": "https://github.com/Cvolton/editor-ids-geode",
+    "repository": "https://github.com/Cvolton/level-id-api-geode",
 	"api": {
 		"include": [
 			"include/*.hpp"
