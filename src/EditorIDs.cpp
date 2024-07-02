@@ -28,7 +28,7 @@ $on_mod(DataSaved) {
 }
 
 int EditorIDs::getID(GJGameLevel* level) {
-    getID(level, true);
+    return getID(level, true);
 }
 
 int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {

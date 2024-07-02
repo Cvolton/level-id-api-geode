@@ -27,8 +27,8 @@ $on_mod(DataSaved) {
     Mod::get()->setSavedValue("editor_list_id_max", s_maxListID);
 }
 
-int EditorIDs::getID(GJGameLevel* level) {
-    getID(level, true);
+int EditorIDs::getID(GJLevelList* list) {
+    return getID(list, true);
 }
 
 int EditorIDs::getID(GJLevelList* list, bool autoAssign) {
