@@ -20,7 +20,7 @@ $on_mod(Loaded) {
 
 $on_mod(DataLoaded) {
     s_maxID = std::max(Mod::get()->getSavedValue("editor_id_max", 0), s_maxID);
-    s_debugPrint = Mod::get()->getSetting("debug-print");
+    s_debugPrint = Mod::get()->getSettingValue<bool>("debug-print");
 }
 
 $on_mod(DataSaved) {
