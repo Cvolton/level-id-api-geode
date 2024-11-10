@@ -1,7 +1,7 @@
 {
-	"geode": "3.4.0",
+	"geode": "4.0.0",
 	"gd": {
-		"win": "2.206",
+		"win": "2.2073",
 		"android": "2.206",
 		"mac": "2.206",
 		"ios": "2.206"
@@ -10,9 +10,11 @@
 	"name": "Editor Level ID API",
 	"version": "v1.0.1",
 	"developer": "Cvolton",
-	"description": "Assigns Level IDs to Editor levels that other mods can use to refer to them",
+	"description": "Assigns Level IDs to Editor levels that other mods can use",
 	"early-load": true,
-    "repository": "https://github.com/Cvolton/level-id-api-geode",
+	"links": {
+		"source": "https://github.com/Cvolton/level-id-api-geode"
+	},
 	"api": {
 		"include": [
 			"include/*.hpp"

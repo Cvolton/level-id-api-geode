@@ -1,7 +1,6 @@
 #include <EditorIDsManagement.hpp>
 
 #include <Geode/Geode.hpp>
-#include <Geode/loader/SettingEvent.hpp>
 #include <queue>
 
 using namespace geode::prelude;
