@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Geode/loader/Dispatch.hpp>
+
 #include <Geode/binding/GJGameLevel.hpp>
 #include <Geode/binding/GJLevelList.hpp>
 
@@ -14,6 +16,18 @@
 #endif
 
 namespace EditorIDs {
+    namespace event {
+        using GetLevelID = geode::DispatchEvent<int*, GJGameLevel*>;
+        using GetListID = geode::DispatchEvent<int*, GJLevelList*>;
+        using GetLevelID2 = geode::DispatchEvent<int*, GJGameLevel*, bool>;
+        using GetListID2 = geode::DispatchEvent<int*, GJLevelList*, bool>;
+
+        using GetLevelByID = geode::DispatchEvent<GJGameLevel*, int>;
+        using GetListByID = geode::DispatchEvent<GJLevelList*, int>;
+    }
+
+#ifndef EDITOR_IDS_USE_EVENTS_API
+
     /**
      * @brief Get the editor ID of a level or list.
      *
@@ -69,4 +83,6 @@ namespace EditorIDs {
      * @return The list with the given ID, or nullptr if no list has that ID.
      */
     EDITORIDS_DLL GJLevelList* getListByID(int id);
+
+#endif // !EDITOR_IDS_USE_EVENTS_API
 }
