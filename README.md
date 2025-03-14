@@ -43,4 +43,6 @@ You can also use `EditorIDs::getLevelByID` and `EditorIDs::getListByID` to perfo
 
 Namespaces `EditorIDs::Management` and `EditorIDs::ListManagement` are also exported, however they should be treated as danger zone and using functions within them should only be considered last resort.
 
+An event-based API is also avaialble in the `EditorIDs::Event` namespace to allow usage as an optional dependency.
+
 Alternatively it is also possible to fetch and check the fields used to store the IDs directly, however this is heavily discouraged, as the exact fields used are considered an implementation detail and subject to change in the future.

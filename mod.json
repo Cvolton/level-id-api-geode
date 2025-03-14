@@ -8,7 +8,7 @@
 	},
 	"id": "cvolton.level-id-api",
 	"name": "Editor Level ID API",
-	"version": "v1.1.0",
+	"version": "v1.2.0",
 	"developer": "Cvolton",
 	"description": "Assigns Level IDs to Editor levels that other mods can use",
 	"early-load": true,
