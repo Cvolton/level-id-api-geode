@@ -16,7 +16,7 @@
 #endif
 
 namespace EditorIDs {
-    namespace event {
+    namespace Event {
         using GetLevelID = geode::DispatchEvent<int*, GJGameLevel*>;
         using GetListID = geode::DispatchEvent<int*, GJLevelList*>;
         using GetLevelID2 = geode::DispatchEvent<int*, GJGameLevel*, bool>;
