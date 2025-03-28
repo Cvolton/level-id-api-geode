@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.2.1</c> (2025-03-28)
+* Fixed "Show IDs in search" showing list IDs for online lists
+
 ## <cg>v1.2.0</c> (2025-03-14)
 * Added event-based API for using this mod as an optional dependency
 
