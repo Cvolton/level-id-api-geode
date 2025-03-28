@@ -119,7 +119,7 @@ class $modify(LevelListCell) {
     void loadFromList(GJLevelList* list) {
         LevelListCell::loadFromList(list);
 
-        if(Mod::get()->getSettingValue<bool>("show-ids")) {
+        if(Mod::get()->getSettingValue<bool>("show-ids") && list->m_listType == GJLevelType::Editor) {
             auto idTextNode = CCLabelBMFont::create(fmt::format("#{}", EditorIDs::getID(list)).c_str(), "chatFont.fnt");
             idTextNode->setPosition({346,m_height - 1});
             idTextNode->setAnchorPoint({1,1});
