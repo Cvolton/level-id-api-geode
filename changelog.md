@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.2.2</c> (2025-04-01)
+* Added experimental Sapphire SDK support
+
 ## <cg>v1.2.1</c> (2025-03-28)
 * Fixed "Show IDs in search" showing list IDs for online lists
 
