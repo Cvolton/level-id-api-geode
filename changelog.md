@@ -1,4 +1,7 @@
 # Changelog
+## <cg>v1.2.3</c> (2025-06-22)
+* Updated for Geode 4.6.0 (Sapphire Jitless)
+
 ## <cg>v1.2.2</c> (2025-04-01)
 * Added experimental Sapphire SDK support
 
