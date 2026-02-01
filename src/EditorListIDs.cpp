@@ -1,4 +1,3 @@
-#define GEODE_DEFINE_EVENT_EXPORTS
 #include <EditorIDsManagement.hpp>
 
 #include <Geode/Geode.hpp>
@@ -27,18 +26,18 @@ $on_mod(DataSaved) {
     Mod::get()->setSavedValue("editor_list_id_max", s_maxListID);
 }
 
-int EditorIDs::getID(GJLevelList* list) {
+int EditorIDs::Internal::getID(GJLevelList* list) {
     return getID(list, true);
 }
 
-int EditorIDs::getID(GJLevelList* list, bool autoAssign) {
+int EditorIDs::Internal::getID(GJLevelList* list, bool autoAssign) {
     if(list->m_listType != GJLevelType::Editor) return list->m_listID;
 
     if(autoAssign) ListManagement::verifyIDAssignment(list);
     return list->m_downloads == list->m_levelsToClaim ? list->m_downloads : 0;
 }
 
-GJLevelList* EditorIDs::getListByID(int id) {
+GJLevelList* EditorIDs::Internal::getListByID(int id) {
     return s_idMap.contains(id) ? s_idMap[id] : nullptr;
 }
 
@@ -109,7 +108,7 @@ void EditorIDs::ListManagement::tryTransferID(GJLevelList *source, GJLevelList *
 void EditorIDs::ListManagement::listIsDeleting(GJLevelList *list) {
     if(list->m_listType != GJLevelType::Editor) return;
 
-    auto id = EditorIDs::getID(list);
+    auto id = EditorIDs::Internal::getID(list);
 
     if(s_idMap.contains(id) && s_idMap[id] == list) {
         s_idMap.erase(list->m_downloads);
@@ -123,7 +122,7 @@ void EditorIDs::ListManagement::handleListDupes(cocos2d::CCArray* array) {
 
     std::unordered_set<int> ids;
     for(auto list : CCArrayExt<GJLevelList*>(array)) {
-        auto id = EditorIDs::getID(list);
+        auto id = EditorIDs::Internal::getID(list);
 
         if(ids.contains(id)) {
             if(s_debugPrint) log::warn("Found duplicate ID {} in local lists, assigning new ID", id);

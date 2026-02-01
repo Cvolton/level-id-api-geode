@@ -1,4 +1,3 @@
-#define GEODE_DEFINE_EVENT_EXPORTS
 #include <EditorIDsManagement.hpp>
 
 #include <Geode/Geode.hpp>
@@ -27,11 +26,7 @@ $on_mod(DataSaved) {
     Mod::get()->setSavedValue("editor_id_max", s_maxID);
 }
 
-int EditorIDs::getID(GJGameLevel* level) {
-    return getID(level, true);
-}
-
-int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {
+int EditorIDs::Internal::getID(GJGameLevel* level, bool autoAssign) {
     if(level->m_levelType != GJLevelType::Editor) return level->m_levelID;
 
     if(autoAssign) Management::verifyIDAssignment(level);
@@ -39,7 +34,11 @@ int EditorIDs::getID(GJGameLevel* level, bool autoAssign) {
 
 }
 
-GJGameLevel* EditorIDs::getLevelByID(int id) {
+int EditorIDs::Internal::getID(GJGameLevel* level) {
+    return getID(level, true);
+}
+
+GJGameLevel* EditorIDs::Internal::getLevelByID(int id) {
     return s_idMap.contains(id) ? s_idMap[id] : nullptr;
 }
 
@@ -110,7 +109,7 @@ void EditorIDs::Management::tryTransferID(GJGameLevel *source, GJGameLevel *dest
 void EditorIDs::Management::levelIsDeleting(GJGameLevel *level) {
     if(level->m_levelType != GJLevelType::Editor) return;
 
-    auto id = EditorIDs::getID(level);
+    auto id = EditorIDs::Internal::getID(level);
 
     if(s_idMap.contains(id) && s_idMap[id] == level) {
         s_idMap.erase(level->m_downloads);
@@ -124,7 +123,7 @@ void EditorIDs::Management::handleLevelDupes(cocos2d::CCArray* array) {
 
     std::unordered_set<int> ids;
     for(auto level : CCArrayExt<GJGameLevel*>(array)) {
-        auto id = EditorIDs::getID(level);
+        auto id = EditorIDs::Internal::getID(level);
 
         if(ids.contains(id)) {
             if(s_debugPrint) log::warn("Found duplicate ID {} in local levels, assigning new ID", id);

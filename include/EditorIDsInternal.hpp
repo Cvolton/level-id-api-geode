@@ -1,12 +1,20 @@
 #pragma once
 
-#include <Geode/loader/Dispatch.hpp>
-#define MY_MOD_ID "cvolton.level-id-api"
-
 #include <Geode/binding/GJGameLevel.hpp>
 #include <Geode/binding/GJLevelList.hpp>
 
-namespace EditorIDs {
+#ifdef GEODE_IS_WINDOWS
+    #ifdef CVOLTON_EDITORIDS_EXPORTING
+        #define EDITORIDS_DLL __declspec(dllexport)
+    #else
+        #pragma message("You are including an internal header of Editor Level ID api! Only continue if you know what you are doing, otherwise only use EditorIDs.hpp")
+        #define EDITORIDS_DLL __declspec(dllimport)
+    #endif
+#else
+    #define EDITORIDS_DLL __attribute__((visibility("default")))
+#endif
+
+namespace EditorIDs::Internal {
     /**
      * @brief Get the editor ID of a level or list.
      *
@@ -14,7 +22,7 @@ namespace EditorIDs {
      *
      * @return The ID of the level, or m_levelID if the level is not editor.
      */
-    inline int getID(GJGameLevel* level) GEODE_EVENT_EXPORT_ID_NORES(&getID, (level), MY_MOD_ID "/getID-level");
+    int getID(GJGameLevel* level);
 
     /**
      * @brief Get the editor ID of a level or list.
@@ -23,7 +31,7 @@ namespace EditorIDs {
      *
      * @return The ID of the level, or m_levelID if the level is not editor.
      */
-    inline int getID(GJLevelList* list) GEODE_EVENT_EXPORT_ID_NORES(static_cast<int(*)(GJLevelList*)>(&getID), (list), MY_MOD_ID "/getID-list");
+    int getID(GJLevelList* list);
 
     /**
      * @brief Get the editor ID of a level or list.
@@ -33,7 +41,7 @@ namespace EditorIDs {
      *
      * @return The ID of the level, or m_levelID if the level is not editor.
      */
-    inline int getID(GJGameLevel* level, bool autoAssign) GEODE_EVENT_EXPORT_ID_NORES(static_cast<int(*)(GJGameLevel*, bool)>(&getID), (level, autoAssign), MY_MOD_ID "/getID-level-autoAssign");
+    int getID(GJGameLevel* level, bool autoAssign);
 
     /**
      * @brief Get the editor ID of a level or list.
@@ -43,7 +51,7 @@ namespace EditorIDs {
      *
      * @return The ID of the level, or m_levelID if the level is not editor.
      */
-    inline int getID(GJLevelList* list, bool autoAssign) GEODE_EVENT_EXPORT_ID_NORES(static_cast<int(*)(GJLevelList*, bool)>(&getID), (list, autoAssign), MY_MOD_ID "/getID-list-autoAssign");
+    int getID(GJLevelList* list, bool autoAssign);
 
     /**
      * @brief Get a level by its editor ID.
@@ -52,7 +60,7 @@ namespace EditorIDs {
      *
      * @return The level with the given ID, or nullptr if no level has that ID.
      */
-    inline GJGameLevel* getLevelByID(int id) GEODE_EVENT_EXPORT_NORES(&getLevelByID, (id));
+    GJGameLevel* getLevelByID(int id);
 
     /**
      * @brief Get a list by its editor ID.
@@ -61,7 +69,7 @@ namespace EditorIDs {
      *
      * @return The list with the given ID, or nullptr if no list has that ID.
      */
-    inline GJLevelList* getListByID(int id) GEODE_EVENT_EXPORT_NORES(&getListByID, (id));
+    GJLevelList* getListByID(int id);
 }
 
 //#undef MY_MOD_ID

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EditorIDs.hpp"
+#include "EditorIDsInternal.hpp"
 
 namespace EditorIDs {
     namespace Management {
