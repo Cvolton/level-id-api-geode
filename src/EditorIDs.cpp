@@ -1,3 +1,4 @@
+#define GEODE_DEFINE_EVENT_EXPORTS
 #include <EditorIDsManagement.hpp>
 
 #include <Geode/Geode.hpp>
