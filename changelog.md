@@ -1,4 +1,9 @@
 # Changelog
+## <cg>v2.0.0</c> (2026-02-??)
+* Updated for Geode 5.0.0 and GD 2.208
+* Changed main API to use events (usage should remain unaffected)
+* Removed old secondary optional events api
+
 ## <cg>v1.2.3</c> (2025-06-22)
 * Updated for Geode 4.6.0 (Sapphire Jitless)
 
