@@ -13,7 +13,7 @@ static std::atomic_bool s_checkQueued = false;
 static std::unordered_map<int, Ref<GJLevelList>> s_idMap;
 
 $on_mod(Loaded) {
-    listenForSettingChanges("debug-print", +[](bool value) {
+    listenForSettingChanges<bool>("debug-print", +[](bool value) {
         s_debugPrint = value;
     });
 }
