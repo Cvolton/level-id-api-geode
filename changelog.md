@@ -1,5 +1,5 @@
 # Changelog
-## <cg>v2.0.0</c> (2026-02-??)
+## <cg>v2.0.0</c> (2026-02-15)
 * Updated for Geode 5.0.0 and GD 2.208
 * Changed main API to use events (usage should remain unaffected)
 * Removed old secondary optional events api

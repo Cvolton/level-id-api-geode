@@ -1,5 +1,5 @@
 {
-	"geode": "5.0.0-alpha.2",
+	"geode": "5.0.0-beta.1",
 	"gd": {
 		"win": "2.2081",
 		"android": "2.2081",
@@ -8,7 +8,7 @@
 	},
 	"id": "cvolton.level-id-api",
 	"name": "Editor Level ID API",
-	"version": "v2.0.0-beta.2",
+	"version": "v2.0.0",
 	"developer": "Cvolton",
 	"description": "Assigns IDs to Editor levels for other mods to use",
 	"early-load": true,
