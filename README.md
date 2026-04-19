@@ -14,13 +14,9 @@ You can use Editor Level ID API as a dependency by declaring it in your `mod.jso
 
 ```json
 {
-    "dependencies": [
-        {
-            "id": "cvolton.level-id-api",
-            "version": "v1.0.0",
-            "importance": "required"
-        }
-    ]
+    "dependencies": {
+        "cvolton.level-id-api": ">=2.0.0"
+    }
 }
 ```
 and using the following header:
