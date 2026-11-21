@@ -109,7 +109,7 @@ class $modify(LevelCell) {
         LevelCell::loadLocalLevelCell();
 
         if(Mod::get()->getSettingValue<bool>("show-ids")) {
-            auto idTextNode = CCLabelBMFont::create(fmt::format("#{}", EditorIDs::Internal::getID(m_level)).c_str(), "chatFont.fnt");
+            auto idTextNode = Label::create(fmt::format("#{}", EditorIDs::Internal::getID(m_level)), "chatFont.fnt");
             idTextNode->setPosition({346,m_height - 1});
             if(m_level->m_dailyID == 0 && Loader::get()->isModLoaded("n.level-pronouns")) {
                 if(m_compactView) idTextNode->setPositionX(idTextNode->getPositionX() - 23.f);
@@ -131,7 +131,7 @@ class $modify(LevelListCell) {
         LevelListCell::loadFromList(list);
 
         if(Mod::get()->getSettingValue<bool>("show-ids") && list->m_listType == GJLevelType::Editor) {
-            auto idTextNode = CCLabelBMFont::create(fmt::format("#{}", EditorIDs::Internal::getID(list)).c_str(), "chatFont.fnt");
+            auto idTextNode = Label::create(fmt::format("#{}", EditorIDs::Internal::getID(list)), "chatFont.fnt");
             idTextNode->setPosition({346,m_height - 1});
             idTextNode->setAnchorPoint({1,1});
             idTextNode->setScale(0.6f);
