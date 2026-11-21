@@ -1,4 +1,9 @@
 # Changelog
+## <cg>v2.0.1</c> (2026-11-21)
+* Updated for Geode 6.0.0 and GD 2.2091
+* Update C++ Standard to 23
+* Switch from `CCLabelBMFont` to `geode::Label`
+
 ## <cg>v2.0.0</c> (2026-02-15)
 * Updated for Geode 5.0.0 and GD 2.208
 * Changed main API to use events (usage should remain unaffected)
