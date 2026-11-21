@@ -5,6 +5,10 @@ Reuses `m_downloads` and `m_featured` on `GJGameLevel` and `m_downloads` and `m_
 
 <img src="logo.png" width="150" alt="the mod's logo" />
 
+## Do I need this?
+
+Starting with 2.209, most mod developers might not need to use this mod - `GJGameLevel::m_autoBackupID` (property 126) can be used to serve the same purpose and it is assigned by the vanilla game. This mod is however still maintained, primarily to provide an option for already existing mods.
+
 ## How does this work?
 
 Every level stores the same piece of information regardless of type. Since some information (download counts, featured state) is not actually used for editor levels, this mod repurposes these fields to store a unique ID value (per save file). This means that these IDs do not disappear if you uninstall the mod or if you load your save file in a copy of the game that does not have Geode installed - your levels will get their assigned IDs back after reinstalling the mod.
@@ -21,7 +25,7 @@ You can use Editor Level ID API as a dependency by declaring it in your `mod.jso
 ```
 and using the following header:
 ```cpp
-#include <cvolton.level-id-api/include/EditorIDs.hpp>
+#include <cvolton.level-id-api/EditorIDs.hpp>
 ```
 
 All editor levels should already have IDs assigned by default on mod load. Getting the ID assigned to the level can be done as follows:

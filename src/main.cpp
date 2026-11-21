@@ -69,9 +69,20 @@ class $modify(GameManager) {
         EditorIDs::ListManagement::tryRaiseMaxID(getIntGameVariable("editor_list_id_max"_spr));
     }
 
+    // rewritten to be slightly more thread safe
+    void customSetIntGameVariable(char const* keyR, int valueR) {
+        auto key = fmt::format("gv_{}", keyR);
+        auto value = fmt::to_string(valueR);
+
+        auto valstr = Ref<CCString>::adopt(new CCString());
+        valstr->m_sString = value;
+
+        m_valueKeeper->setObject(valstr, key);
+    }
+
     void encodeDataTo(DS_Dictionary* dict) {
-        setIntGameVariable("editor_id_max"_spr, EditorIDs::Management::getMaxID());
-        setIntGameVariable("editor_list_id_max"_spr, EditorIDs::ListManagement::getMaxID());
+        customSetIntGameVariable("editor_id_max"_spr, EditorIDs::Management::getMaxID());
+        customSetIntGameVariable("editor_list_id_max"_spr, EditorIDs::ListManagement::getMaxID());
 
         GameManager::encodeDataTo(dict);
     }

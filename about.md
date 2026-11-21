@@ -6,4 +6,4 @@ Please note, that these "Editor Level IDs" have nothing to do with the online le
 
 ## How does this work?
 
-See [README.md](https://github.com/Cvolton/editor-ids-geode/blob/main/README.md) for documentation how this works, usage and other developer notes.
+See [README.md](https://github.com/Cvolton/editor-ids-geode/blob/main/README.md) for documentation how this works, usage and other developer notes. (Including a different method that doesn't require this mod anymore.)
