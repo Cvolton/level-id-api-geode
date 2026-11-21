@@ -33,12 +33,6 @@
             "description": "Whether debug messages should be printed in the Geode Console for further debugging assistance",
             "type": "bool",
             "default": false
-        },
-        "skibidi": {
-            "name": "skibidi",
-            "description": "Whether debug messages should be printed in the Geode Console for further debugging assistance",
-            "type": "bool",
-            "default": true
         }
 	}
 }
